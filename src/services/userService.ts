@@ -9,12 +9,8 @@ const config: object = {
   algorithm: 'HS256',
 };
 
-export function getAll() {
-  console.log('rest');
-}
-
-export async function create(user: IUser) {
-  const payload = await userModel.create(user);
+export default async function create(user: IUser) {
+  const payload = await userModel.default(user);
   const token = jwt.sign({ payload }, secret, config);
   const data = { token };
   return { status: 201, data };
